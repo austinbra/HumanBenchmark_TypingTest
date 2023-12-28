@@ -1,26 +1,25 @@
-import requests
 from bs4 import BeautifulSoup
+import time
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import pyautogui
+
 
 url = "https://humanbenchmark.com/tests/typing"
-response = requests.get(url)
+browser = webdriver.Chrome()
 
-# Check if the request was successful (status code 200)
-if response.status_code == 200:
-    # Parse the HTML content using BeautifulSoup
-    soup = BeautifulSoup(response.text, 'html.parser')
+browser.get(url)
+time.sleep(5)
+browser.implicitly_wait(10)
+# Open Chrome in debug mode
+source = browser.page_source
 
-    # Extract information from the HTML using BeautifulSoup methods
-    # Example: Get the title of the website
-    title = soup.title.text
-    print("Title:", title)
+# Now, use BeautifulSoup to extract information from the website
+soup = BeautifulSoup(source, 'html.parser')
 
-    # Example: Get all the links on the page
-    links = soup.find_all('a')
-    print("Links:")
-    for link in links:
-        print(link['href'])
+# Find all <span> elements within the 'letters notranslate' class
+spans = soup.find_all('span', class_='incomplete')
+text = ''.join([span.get_text() for span in spans])
 
-    # You can explore and extract more information based on the HTML structure
-
-else:
-    print("Failed to retrieve the webpage. Status code:", response.status_code)
+pyautogui.write(text,interval=0)
+time.sleep(10000)
