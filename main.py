@@ -23,3 +23,4 @@ text = ''.join([span.get_text() for span in spans])
 
 pyautogui.write(text,interval=0)
 time.sleep(10000)
+
