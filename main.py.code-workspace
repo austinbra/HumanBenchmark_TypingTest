@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "HumanBenchmark_ReactionTime",
+			"path": "../HumanBenchmark_ReactionTime/HumanBenchmark_ReactionTime"
+		}
+	],
+	"settings": {}
+}
